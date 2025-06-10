@@ -1,0 +1,11 @@
+name,email,phone,dob,notes
+Alice Smith,alice.smith@example.com,555-123-4567,03/15/1990,VIP customer
+Bob Johnson,bob.j@techcorp.io,+1 (800) 555-9999,07/04/1985,Enterprise account
+Charlie Brown,charlie@email.net,333-444-5555,12/01/1978,Regular user
+Diana Prince,diana.prince@hero.org,,11/22/1995,No phone on file
+Eve Davis,eve@startup.com,777-888-9999,,Marketing lead
+Frank Miller,frank.miller@bigco.com,999-000-1111,02/28/1982,Finance team
+Grace Lee,,555-246-8013,,Support agent
+Henry Ford,h.ford@motors.io,444-555-6666,07/30/1863,Historical record
+Ivan Drago,ivan@boxers.ru,+7 999 123 4567,,International client
+Jane Doe,jane.doe@anonymous.com,123-456-7890,01/01/2000,Test account

@@ -1,0 +1,6 @@
+[
+  {"user_id": 1, "email": "alice@example.com", "ip_address": "192.168.1.100", "activity": "login"},
+  {"user_id": 2, "email": "bob@test.org", "ip_address": "10.0.0.55", "activity": "purchase"},
+  {"user_id": 3, "email": "no-pii-here", "ip_address": "not-an-ip", "activity": "browse"},
+  {"user_id": 4, "email": "charlie@corp.io", "ip_address": "172.16.254.1", "activity": "logout"}
+]
