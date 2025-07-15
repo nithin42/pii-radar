@@ -184,7 +184,14 @@ make all       # format + lint + typecheck + test
 
 ---
 
-## 🗺️ Roadmap
+## Directory Scanning
+
+Scan all files in a folder recursively:
+```bash
+pii-radar scan data/
+```bash
+
+## Roadmap
 
 - [ ] Named entity recognition (NER) mode for detecting names
 - [ ] XLSX and SQL dump file support
