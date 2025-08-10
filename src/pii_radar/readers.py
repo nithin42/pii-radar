@@ -83,3 +83,5 @@ def _iter_dataframe(df: pd.DataFrame) -> Generator[Cell, None, None]:
         for row_idx, value in enumerate(df[col]):
             if value and value not in ("nan", "None", ""):
                 yield col, str(value), row_idx
+
+# Supports UTF-8 and latin-1 fallback for legacy CSV files
