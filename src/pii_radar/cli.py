@@ -156,3 +156,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+# JSON output mode enables CI/CD pipeline integration
