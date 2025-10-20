@@ -112,7 +112,7 @@ flowchart TD
 | PHONE | US/International formats | 85% | `+1 (800) 555-9999` |
 | DATE_OF_BIRTH | MM/DD/YYYY variants | 75% | `03/15/1990` |
 
-**Benchmark on 1M cell dataset**: ~2.3 seconds (Apple M2), ~4.1 seconds (Intel i5)
+**Benchmark on 1M cell dataset**: ~2.1 seconds (Apple M2), ~4.1 seconds (Intel i5)
 
 ---
 
