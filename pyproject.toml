@@ -65,3 +65,5 @@ target-version = ["py39", "py310", "py311", "py312"]
 python_version = "3.9"
 strict = true
 ignore_missing_imports = true
+
+# Updated for Python 3.12 compatibility
