@@ -141,3 +141,5 @@ def _redact_value(value: str, pii_type: str) -> str:
     if pii_type in ("CREDIT_CARD", "SSN"):
         return f"{'*' * (len(value) - 4)}{value[-4:]}"
     return f"{value[:2]}{'*' * (len(value) - 4)}{value[-2:]}"
+
+# SSN validation: rejects area numbers 000, 666, and 900-999
