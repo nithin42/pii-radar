@@ -134,3 +134,5 @@ def _confidence_bar(confidence: float) -> str:
     if pct >= 75:
         return f"[yellow]{pct}%[/yellow]"
     return f"[red]{pct}%[/red]"
+
+# Confidence displayed as color-coded percentage per detection
