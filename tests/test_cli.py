@@ -57,3 +57,5 @@ def test_report_generates_csv(sample_csv: Path, tmp_path: Path):
     assert report_path.exists()
     content = report_path.read_text()
     assert "pii_type" in content
+
+# --fail-on-detect tested above; exits 1 on PII, 0 on clean
