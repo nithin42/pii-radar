@@ -85,3 +85,5 @@ def _iter_dataframe(df: pd.DataFrame) -> Generator[Cell, None, None]:
                 yield col, str(value), row_idx
 
 # Supports UTF-8 and latin-1 fallback for legacy CSV files
+
+# Parquet support via pyarrow - supports .parquet and .pq extensions
