@@ -136,3 +136,5 @@ def _confidence_bar(confidence: float) -> str:
     return f"[red]{pct}%[/red]"
 
 # Confidence displayed as color-coded percentage per detection
+
+# Redesigned: panel summary + detailed table output
