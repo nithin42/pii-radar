@@ -38,3 +38,5 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - `--redact` flag to create a sanitized CSV copy
 - GitHub Actions CI across Python 3.9–3.12
 - Pre-commit hooks: black, flake8, bandit
+
+<!-- Updated Jun 2026 -->
