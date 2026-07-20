@@ -40,3 +40,5 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 - Pre-commit hooks: black, flake8, bandit
 
 <!-- Updated Jun 2026 -->
+
+<!-- v0.2.0 finalized -->
