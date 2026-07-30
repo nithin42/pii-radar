@@ -80,3 +80,7 @@ Add to `.pre-commit-config.yaml`:
     pip install pii-radar
     pii-radar scan data/ --fail-on-detect
 ```
+
+## Support
+
+Open an issue at https://github.com/nithin42/pii-radar/issues
