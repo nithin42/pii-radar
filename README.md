@@ -6,7 +6,7 @@
 
 [![CI](https://github.com/nithin42/pii-radar/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/nithin42/pii-radar/actions/workflows/ci.yml)
 [![Coverage](https://img.shields.io/badge/coverage-87%25-brightgreen)](https://github.com/nithin42/pii-radar)
-[![PyPI version](https://img.shields.io/pypi/v/pii-radar.svg)](https://pypi.org/project/pii-radar/)
+[![PyPI version](https://badge.fury.io/py/pii-radar.svg?v=0.4.0)](https://pypi.org/project/pii-radar/)
 [![Python](https://img.shields.io/badge/python-3.9%20|%203.10%20|%203.11%20|%203.12-blue)](https://pypi.org/project/pii-radar/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
