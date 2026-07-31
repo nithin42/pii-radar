@@ -59,6 +59,10 @@ _DOB_DATE_PATTERN = re.compile(
     r"\b(?:0?[1-9]|1[0-2])[/\-.](?:0?[1-9]|[12]\d|3[01])[/\-.](?:19|20)\d{2}\b"
 )
 
+_IPV4_PATTERN = re.compile(
+    r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b"
+)
+
 PATTERNS = {
     "EMAIL": _EMAIL_PATTERN,
     "PHONE": _PHONE_PATTERN,
