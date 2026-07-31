@@ -8,8 +8,6 @@ from __future__ import annotations
 
 import json
 import csv
-import sys
-from io import StringIO
 from pathlib import Path
 from typing import List
 
@@ -17,7 +15,6 @@ from rich.console import Console
 from rich.table import Table
 from rich import box
 from rich.panel import Panel
-from rich.text import Text
 
 from pii_radar.scanner import ScanResult
 

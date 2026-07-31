@@ -130,7 +130,6 @@ def _redact_csv(source: Path, dest: Path, results) -> None:
     """Write a redacted copy of the CSV with PII values replaced."""
     import pandas as pd
     from pii_radar.detectors import _PATTERNS
-    import re
 
     if source.suffix.lower() != ".csv":
         console.print("[yellow]⚠️  --redact only supports CSV files.[/yellow]")
