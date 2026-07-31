@@ -76,6 +76,13 @@ def cli() -> None:
     help="Save a redacted copy of the input file (CSV only).",
 )
 @click.option(
+    "--sample",
+    "-s",
+    type=click.IntRange(1),
+    default=None,
+    help="Limit scan to first N rows per file (for quick audit sampling).",
+)
+@click.option(
     "--fail-on-detect",
     is_flag=True,
     default=False,
@@ -87,6 +94,7 @@ def scan(
     min_confidence: float,
     report: Optional[str],
     redact: Optional[str],
+    sample: Optional[int],
     fail_on_detect: bool,
 ) -> None:
     """Scan a FILE or DIRECTORY for PII."""
@@ -94,9 +102,9 @@ def scan(
     target_path = Path(target)
 
     if target_path.is_dir():
-        results = scan_directory(target_path, min_confidence=min_confidence)
+        results = scan_directory(target_path, min_confidence=min_confidence, sample_rows=sample)
     else:
-        results = [scan_file(target_path, min_confidence=min_confidence)]
+        results = [scan_file(target_path, min_confidence=min_confidence, sample_rows=sample)]
 
     # ── Output ──────────────────────────────────────────────────────────────
     print_summary(results)

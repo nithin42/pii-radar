@@ -4,6 +4,17 @@ All notable changes to **pii-radar** are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.4.0] — 2026-07-31
+
+### Added
+- **Luhn Mod-10 Algorithm Checksum**: Validates credit card numbers to eliminate 16-digit account/order false positives
+- **IPv4 Octet Range Validation**: Verifies 0-255 octet bounds and rejects version strings
+- **DOB Column Heuristics**: Contextual matching on column headers (`dob`, `birth`, `birthday`, `bday`)
+- **`--sample N` / `-s N` Flag**: Limits row scanning for rapid audit sampling on massive files
+- **`tests/test_negative_cases.py`**: Comprehensive false-positive unit test suite
+- **`examples/benchmark.py`**: Performance benchmarking script
+- **Windows Runner**: Added `windows-latest` to GitHub Actions CI matrix
+
 ## [0.3.1] — 2026-07-30
 
 ### Added

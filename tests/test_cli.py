@@ -58,3 +58,19 @@ def test_report_generates_csv(sample_csv: Path, tmp_path: Path):
     assert report_path.exists()
     content = report_path.read_text()
     assert "pii_type" in content
+
+
+def test_redact_generates_sanitized_csv(sample_csv: Path, tmp_path: Path):
+    redacted_path = tmp_path / "redacted.csv"
+    runner = CliRunner()
+    result = runner.invoke(cli, ["scan", str(sample_csv), "--redact", str(redacted_path)])
+    assert result.exit_code == 0
+    assert redacted_path.exists()
+    content = redacted_path.read_text()
+    assert "[REDACTED]" in content
+
+
+def test_sample_rows_option(sample_csv: Path):
+    runner = CliRunner()
+    result = runner.invoke(cli, ["scan", str(sample_csv), "--sample", "1", "--output", "json"])
+    assert result.exit_code == 0
