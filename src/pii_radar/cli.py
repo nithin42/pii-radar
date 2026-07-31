@@ -133,7 +133,7 @@ def scan(
 def _redact_csv(source: Path, dest: Path, results) -> None:
     """Write a redacted copy of the CSV with PII values replaced."""
     import pandas as pd
-    from pii_radar.detectors import _PATTERNS
+    from pii_radar.detectors import PATTERNS
 
     if source.suffix.lower() != ".csv":
         Console().print("[yellow]⚠️  --redact only supports CSV files.[/yellow]")
@@ -143,12 +143,12 @@ def _redact_csv(source: Path, dest: Path, results) -> None:
     for result in results:
         for match in result.matches:
             col = match.column
-            if col in df.columns:
-                for pii_type, (pattern, _) in _PATTERNS.items():
-                    df[col] = df[col].apply(
-                        lambda v: pattern.sub("[REDACTED]", str(v))
-                        if isinstance(v, str) else v
-                    )
+            if col in df.columns and match.pii_type in PATTERNS:
+                pattern = PATTERNS[match.pii_type]
+                df[col] = df[col].apply(
+                    lambda v: pattern.sub("[REDACTED]", str(v))
+                    if isinstance(v, str) else v
+                )
     df.to_csv(dest, index=False)
     Console().print(f"[green]🔒 Redacted file saved to:[/green] {dest}")
 

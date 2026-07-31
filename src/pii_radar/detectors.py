@@ -55,13 +55,18 @@ _CREDIT_CARD_RAW_PATTERN = re.compile(
     r"\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|6(?:011|5[0-9]{2})[0-9]{12})\b"
 )
 
-_IPV4_PATTERN = re.compile(
-    r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b"
-)
-
 _DOB_DATE_PATTERN = re.compile(
     r"\b(?:0?[1-9]|1[0-2])[/\-.](?:0?[1-9]|[12]\d|3[01])[/\-.](?:19|20)\d{2}\b"
 )
+
+PATTERNS = {
+    "EMAIL": _EMAIL_PATTERN,
+    "PHONE": _PHONE_PATTERN,
+    "SSN": _SSN_PATTERN,
+    "CREDIT_CARD": _CREDIT_CARD_RAW_PATTERN,
+    "IP_ADDRESS": _IPV4_PATTERN,
+    "DATE_OF_BIRTH": _DOB_DATE_PATTERN,
+}
 
 _DOB_COLUMN_KEYWORDS = {
     "dob", "birth", "birthday", "date_of_birth", "born", "birthdate", "bday"
