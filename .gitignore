@@ -59,3 +59,7 @@ reports/
 
 # Notebooks checkpoints
 .ipynb_checkpoints/
+
+# Local helper scripts
+*.ps1
+
