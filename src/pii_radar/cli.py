@@ -95,12 +95,10 @@ def scan(
 
     target_path = Path(target)
 
-    # ── Scanning ────────────────────────────────────────────────────────────
-    with console.status("[bold cyan]Scanning for PII…[/bold cyan]"):
-        if target_path.is_dir():
-            results = scan_directory(target_path, min_confidence=min_confidence)
-        else:
-            results = [scan_file(target_path, min_confidence=min_confidence)]
+    if target_path.is_dir():
+        results = scan_directory(target_path, min_confidence=min_confidence)
+    else:
+        results = [scan_file(target_path, min_confidence=min_confidence)]
 
     # ── Output ──────────────────────────────────────────────────────────────
     print_summary(results)
