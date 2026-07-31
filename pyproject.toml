@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "pii-radar"
-version = "0.2.0"
+version = "0.3.0"
 description = "CLI tool to scan CSV, JSON, and Parquet files for Personally Identifiable Information (PII)"
 readme = "README.md"
 license = { file = "LICENSE" }

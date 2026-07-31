@@ -4,7 +4,12 @@ All notable changes to **pii-radar** are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This project adheres to [Semantic Versioning](https://semver.org/).
 
----
+## [0.3.0] — 2026-07-30
+
+### Added
+- PyPI Trusted Publisher integration via OpenID Connect (OIDC)
+- Dynamic Console instantiation for headless CliRunner output compatibility
+- Pytest pythonpath options in pyproject.toml
 
 ## [0.2.0] — 2026-07-20
 
