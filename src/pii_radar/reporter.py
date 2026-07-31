@@ -18,8 +18,6 @@ from rich.panel import Panel
 
 from pii_radar.scanner import ScanResult
 
-console = Console()
-
 
 def print_summary(results: List[ScanResult]) -> None:
     """Print a high-level summary panel to the terminal."""
@@ -38,7 +36,7 @@ def print_summary(results: List[ScanResult]) -> None:
         f"[bold]PII Matches:[/bold]    {total_matches}\n"
         f"[bold]Status:[/bold]         [{color}]{status}[/{color}]"
     )
-    console.print(Panel(summary, title="[bold cyan]pii-radar — Scan Summary[/bold cyan]", expand=False))
+    Console().print(Panel(summary, title="[bold cyan]pii-radar — Scan Summary[/bold cyan]", expand=False))
 
 
 def print_table(results: List[ScanResult]) -> None:
@@ -46,7 +44,7 @@ def print_table(results: List[ScanResult]) -> None:
     flagged = [r for r in results if not r.is_clean]
 
     if not flagged:
-        console.print("[bold green]✅ No PII detected in any scanned files.[/bold green]")
+        Console().print("[bold green]✅ No PII detected in any scanned files.[/bold green]")
         return
 
     for result in flagged:
@@ -72,7 +70,7 @@ def print_table(results: List[ScanResult]) -> None:
                 confidence_bar,
             )
 
-        console.print(table)
+        Console().print(table)
 
 
 def print_json(results: List[ScanResult]) -> None:
@@ -98,7 +96,7 @@ def print_json(results: List[ScanResult]) -> None:
                 ],
             }
         )
-    console.print_json(json.dumps(output, indent=2))
+    Console().print_json(json.dumps(output, indent=2))
 
 
 def save_csv_report(results: List[ScanResult], output_path: Path) -> None:

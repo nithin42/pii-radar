@@ -54,6 +54,7 @@ Issues = "https://github.com/nithin42/pii-radar/issues"
 where = ["src"]
 
 [tool.pytest.ini_options]
+pythonpath = ["src"]
 testpaths = ["tests"]
 addopts = "--cov=pii_radar --cov-report=term-missing --cov-report=xml"
 

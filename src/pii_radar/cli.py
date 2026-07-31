@@ -26,8 +26,6 @@ from pii_radar.reporter import (
     save_csv_report,
 )
 
-console = Console()
-
 
 @click.group()
 @click.version_option(version=__version__, prog_name="pii-radar")
@@ -112,7 +110,7 @@ def scan(
     if report:
         report_path = Path(report)
         save_csv_report(results, report_path)
-        console.print(f"\n[green]📄 Report saved to:[/green] {report_path}")
+        Console().print(f"\n[green]📄 Report saved to:[/green] {report_path}")
 
     # ── Optional redaction ──────────────────────────────────────────────────
     if redact:
@@ -120,7 +118,7 @@ def scan(
 
     # ── CI/CD exit code ─────────────────────────────────────────────────────
     if fail_on_detect and any(not r.is_clean for r in results):
-        console.print("\n[bold red]❌ PII detected — failing build.[/bold red]")
+        Console().print("\n[bold red]❌ PII detected — failing build.[/bold red]")
         sys.exit(1)
 
 
@@ -130,7 +128,7 @@ def _redact_csv(source: Path, dest: Path, results) -> None:
     from pii_radar.detectors import _PATTERNS
 
     if source.suffix.lower() != ".csv":
-        console.print("[yellow]⚠️  --redact only supports CSV files.[/yellow]")
+        Console().print("[yellow]⚠️  --redact only supports CSV files.[/yellow]")
         return
 
     df = pd.read_csv(source, dtype=str)
@@ -144,7 +142,7 @@ def _redact_csv(source: Path, dest: Path, results) -> None:
                         if isinstance(v, str) else v
                     )
     df.to_csv(dest, index=False)
-    console.print(f"[green]🔒 Redacted file saved to:[/green] {dest}")
+    Console().print(f"[green]🔒 Redacted file saved to:[/green] {dest}")
 
 
 def main() -> None:
