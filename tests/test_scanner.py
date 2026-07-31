@@ -49,19 +49,25 @@ class TestScanFile:
 
 
 class TestScanDirectory:
-    def test_scans_multiple_files(self, tmp_dir: Path, sample_csv: Path, sample_json: Path):
+    def test_scans_multiple_files(self, tmp_path: Path, sample_csv: Path, sample_json: Path):
         import shutil
-        shutil.copy(sample_csv, tmp_dir / "a.csv")
-        shutil.copy(sample_json, tmp_dir / "b.json")
-        results = scan_directory(tmp_dir)
+        sub = tmp_path / "subdir"
+        sub.mkdir()
+        shutil.copy(sample_csv, sub / "a.csv")
+        shutil.copy(sample_json, sub / "b.json")
+        results = scan_directory(sub)
         assert len(results) == 2
 
-    def test_returns_empty_for_empty_directory(self, tmp_dir: Path):
-        results = scan_directory(tmp_dir)
+    def test_returns_empty_for_empty_directory(self, tmp_path: Path):
+        sub = tmp_path / "empty_dir"
+        sub.mkdir()
+        results = scan_directory(sub)
         assert results == []
 
-    def test_respects_extension_filter(self, tmp_dir: Path, sample_csv: Path):
+    def test_respects_extension_filter(self, tmp_path: Path, sample_csv: Path):
         import shutil
-        shutil.copy(sample_csv, tmp_dir / "data.csv")
-        results = scan_directory(tmp_dir, extensions=(".json",))
+        sub = tmp_path / "filter_dir"
+        sub.mkdir()
+        shutil.copy(sample_csv, sub / "data.csv")
+        results = scan_directory(sub, extensions=(".json",))
         assert results == []
