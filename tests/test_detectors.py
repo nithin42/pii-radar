@@ -64,6 +64,10 @@ class TestIPDetection:
         matches = detect("192.168.1.100", "ip_address", 0)
         assert any(m.pii_type == "IP_ADDRESS" for m in matches)
 
+    def test_detects_valid_ipv6(self):
+        matches = detect("2001:0db8:85a3:0000:0000:8a2e:0370:7334", "ip_address", 0)
+        assert any(m.pii_type == "IP_ADDRESS" for m in matches)
+
     def test_no_false_positive_on_version(self):
         # "1.2.3" is not a full IP
         matches = detect("version 1.2.3", "version", 0)

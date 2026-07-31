@@ -5,7 +5,7 @@ Detects: EMAIL, PHONE, SSN, CREDIT_CARD, IP_ADDRESS, DATE_OF_BIRTH
 Formats: CSV, JSON, Parquet (.parquet, .pq)
 """
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 __author__ = "Nithin"
 __email__ = "kumbam.nithingoud@gmail.com"
 __license__ = "MIT"

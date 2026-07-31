@@ -6,7 +6,7 @@ Supports detection of:
 - Phone numbers (US/international with strict word boundaries)
 - Social Security Numbers (SSN, format + invalid range rejection)
 - Credit card numbers (Luhn Mod-10 algorithm validation)
-- IP addresses (IPv4 with octet range validation 0-255)
+- IP addresses (IPv4 with octet range validation 0-255 & IPv6 hex blocks)
 - Dates of Birth (format + column name context heuristics)
 """
 
@@ -55,12 +55,16 @@ _CREDIT_CARD_RAW_PATTERN = re.compile(
     r"\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|6(?:011|5[0-9]{2})[0-9]{12})\b"
 )
 
-_DOB_DATE_PATTERN = re.compile(
-    r"\b(?:0?[1-9]|1[0-2])[/\-.](?:0?[1-9]|[12]\d|3[01])[/\-.](?:19|20)\d{2}\b"
-)
-
 _IPV4_PATTERN = re.compile(
     r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b"
+)
+
+_IPV6_PATTERN = re.compile(
+    r"\b(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}\b"
+)
+
+_DOB_DATE_PATTERN = re.compile(
+    r"\b(?:0?[1-9]|1[0-2])[/\-.](?:0?[1-9]|[12]\d|3[01])[/\-.](?:19|20)\d{2}\b"
 )
 
 PATTERNS = {
@@ -69,6 +73,7 @@ PATTERNS = {
     "SSN": _SSN_PATTERN,
     "CREDIT_CARD": _CREDIT_CARD_RAW_PATTERN,
     "IP_ADDRESS": _IPV4_PATTERN,
+    "IPV6_ADDRESS": _IPV6_PATTERN,
     "DATE_OF_BIRTH": _DOB_DATE_PATTERN,
 }
 
@@ -119,10 +124,7 @@ def is_valid_ipv4(ip_str: str) -> bool:
         return False
     try:
         numbers = [int(o) for o in octets]
-        if any(n < 0 or n > 255 for n in numbers):
-            return False
-        # Reject 0.0.0.0 or loopback/local ranges if desired, but 0-255 is primary check
-        return True
+        return not any(n < 0 or n > 255 for n in numbers)
     except ValueError:
         return False
 
@@ -205,7 +207,7 @@ def detect(value: str, column: str, row_index: int) -> List[PIIMatch]:
             )
         )
 
-    # 5. IP Address Detection (Regex + IPv4 range check)
+    # 5. IP Address Detection (IPv4 + IPv6)
     ip_match = _IPV4_PATTERN.search(val_clean)
     if ip_match and is_valid_ipv4(ip_match.group(0)):
         matches.append(
@@ -217,11 +219,20 @@ def detect(value: str, column: str, row_index: int) -> List[PIIMatch]:
                 row_index=row_index,
             )
         )
+    elif _IPV6_PATTERN.search(val_clean):
+        matches.append(
+            PIIMatch(
+                pii_type="IP_ADDRESS",
+                value=_redact_value(val_clean, "IP_ADDRESS"),
+                confidence=0.92,
+                column=column,
+                row_index=row_index,
+            )
+        )
 
     # 6. Date of Birth (Format + Column Keyword Heuristics)
     if _DOB_DATE_PATTERN.search(val_clean):
         is_dob_col = any(k in col_lower for k in _DOB_COLUMN_KEYWORDS)
-        # Only flag if column name suggests DOB, or assign lower confidence
         if is_dob_col:
             matches.append(
                 PIIMatch(

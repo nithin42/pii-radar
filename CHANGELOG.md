@@ -4,6 +4,13 @@ All notable changes to **pii-radar** are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.4.1] — 2026-07-31
+
+### Added
+- **IPv6 Regex Detection**: Added 128-bit IPv6 address pattern matching (`_IPV6_PATTERN`)
+- **Optional Parquet Extra**: Made `pyarrow` optional (`pip install pii-radar[parquet]`) for lighter base installs
+- **Test Coverage Validation**: Validated `test_negative_cases.py` and IPv6 detection in unit test suite
+
 ## [0.4.0] — 2026-07-31
 
 ### Added
