@@ -6,6 +6,7 @@ from pathlib import Path
 
 from click.testing import CliRunner
 
+from pii_radar import __version__
 from pii_radar.cli import cli
 
 
@@ -13,7 +14,7 @@ def test_version():
     runner = CliRunner()
     result = runner.invoke(cli, ["--version"])
     assert result.exit_code == 0
-    assert "0.2.0" in result.output
+    assert __version__ in result.output
 
 
 def test_scan_csv_table_output(sample_csv: Path):
