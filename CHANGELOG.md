@@ -4,6 +4,14 @@ All notable changes to **pii-radar** are documented here.
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [0.5.0] — 2026-08-05
+
+### Added
+- **Azure Blob Storage Stream Redactor**: Added `AzureBlobStreamRedactor` (`src/pii_radar/integrations/azure.py`) for real-time PII scanning and masking of CSV/JSON blobs in Azure Storage containers
+- **Azure Event Hubs Redaction Handler**: Added `AzureEventHubHandler` (`src/pii_radar/integrations/azure.py`) for low-latency PII redaction on streaming telemetry event batches
+- **Optional Dependency Extras**: Added `pip install pii-radar[azure]` and `pip install pii-radar[all]`
+- **Test Suite**: Added `test_azure_integration.py` unit test suite
+
 ## [0.4.1] — 2026-07-31
 
 ### Added

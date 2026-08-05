@@ -14,7 +14,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from typing import List
+from typing import Dict, List, Optional, Tuple
 
 
 @dataclass
@@ -257,3 +257,42 @@ def _redact_value(value: str, pii_type: str) -> str:
     if pii_type in ("CREDIT_CARD", "SSN"):
         return f"{'*' * (len(value) - 4)}{value[-4:]}"
     return f"{value[:2]}{'*' * (len(value) - 4)}{value[-2:]}"
+
+
+def scan_and_redact_data(
+    content_bytes: bytes,
+    file_format: str = "csv",
+    pii_types: Optional[List[str]] = None,
+) -> Tuple[bytes, int, Dict[str, int]]:
+    """
+    Scan raw bytes for PII, return redacted bytes, match count, and counts by PII type.
+
+    Args:
+        content_bytes: Input raw bytes data.
+        file_format: Format string ('csv', 'json', etc.).
+        pii_types: Optional list of target PII type names.
+
+    Returns:
+        Tuple of (redacted_bytes, total_matches, counts_by_type).
+    """
+    if not content_bytes:
+        return b"", 0, {}
+
+    text_content = content_bytes.decode("utf-8", errors="replace")
+    target_patterns = PATTERNS
+    if pii_types:
+        target_patterns = {k: v for k, v in PATTERNS.items() if k in pii_types}
+
+    total_matches = 0
+    counts: Dict[str, int] = {k: 0 for k in target_patterns}
+
+    redacted_text = text_content
+    for pii_type, pattern in target_patterns.items():
+        found = pattern.findall(redacted_text)
+        if found:
+            count = len(found)
+            counts[pii_type] += count
+            total_matches += count
+            redacted_text = pattern.sub(f"[REDACTED-{pii_type}]", redacted_text)
+
+    return redacted_text.encode("utf-8"), total_matches, counts
