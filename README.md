@@ -1,7 +1,5 @@
 <div align="center">
 
-<img src="logo.png" width="180" alt="pii-radar logo"/>
-
 # 🔍 pii-radar
 
 **Scan any CSV, JSON, or Parquet file for Personally Identifiable Information — in seconds.**
