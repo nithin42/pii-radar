@@ -28,7 +28,10 @@ Data engineers and ML practitioners routinely work with datasets that silently c
 
 `pii-radar` provides streaming PII redaction components for Microsoft Azure Storage and Azure Event Hubs:
 
-### Stream and Redact Files in Azure Blob Storage
+### Flow 1: Stream and Redact Files in Azure Blob Storage
+
+![Azure Blob Storage PII Redaction Architecture](azure_blob_pii_flow.png)
+
 ```python
 from pii_radar.integrations import AzureBlobStreamRedactor
 
@@ -41,7 +44,10 @@ total_found, counts = redactor.redact_blob("raw_customers.csv", output_blob_name
 print(f"Redacted {total_found} PII occurrences in Azure Blob Storage.")
 ```
 
-### Real-Time PII Redaction in Azure Event Hubs
+### Flow 2: Real-Time PII Redaction in Azure Event Hubs
+
+![Azure Event Hubs Real-Time PII Redaction Architecture](azure_eventhub_pii_flow.png)
+
 ```python
 from pii_radar.integrations import AzureEventHubHandler
 
