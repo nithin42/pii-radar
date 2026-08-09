@@ -30,7 +30,7 @@ Data engineers and ML practitioners routinely work with datasets that silently c
 
 ### Flow 1: Stream and Redact Files in Azure Blob Storage
 
-![Azure Blob Storage PII Redaction Architecture](azure_blob_pii_flow.png)
+![Azure Blob Storage PII Redaction Architecture](azure_blob_pii_flow.jpg)
 
 ```python
 from pii_radar.integrations import AzureBlobStreamRedactor
@@ -46,7 +46,7 @@ print(f"Redacted {total_found} PII occurrences in Azure Blob Storage.")
 
 ### Flow 2: Real-Time PII Redaction in Azure Event Hubs
 
-![Azure Event Hubs Real-Time PII Redaction Architecture](azure_eventhub_pii_flow.png)
+![Azure Event Hubs Real-Time PII Redaction Architecture](azure_eventhub_pii_flow.jpg)
 
 ```python
 from pii_radar.integrations import AzureEventHubHandler
