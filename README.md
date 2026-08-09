@@ -6,11 +6,15 @@
 
 [![CI](https://github.com/nithin42/pii-radar/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/nithin42/pii-radar/actions/workflows/ci.yml)
 [![Coverage](https://img.shields.io/badge/coverage-87%25-brightgreen)](https://github.com/nithin42/pii-radar)
-[![PyPI version](https://badge.fury.io/py/pii-radar.svg?v=0.4.1)](https://pypi.org/project/pii-radar/)
+[![PyPI version](https://badge.fury.io/py/pii-radar.svg?v=0.5.0)](https://pypi.org/project/pii-radar/)
 [![Python](https://img.shields.io/badge/python-3.9%20|%203.10%20|%203.11%20|%203.12-blue)](https://pypi.org/project/pii-radar/)
 [![Discussions](https://img.shields.io/github/discussions/nithin42/pii-radar)](https://github.com/nithin42/pii-radar/discussions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
+<br/>
+
+![pii-radar Terminal Demo](demo.gif)
 
 </div>
 
@@ -20,11 +24,41 @@
 
 Data engineers and ML practitioners routinely work with datasets that silently contain Personally Identifiable Information (PII) — emails, phone numbers, SSNs, credit card numbers, and IP addresses — creating compliance risks under GDPR, CCPA, and HIPAA. **pii-radar** is a lightweight, zero-dependency-ML CLI tool that scans structured data files for PII using high-precision patterns, Luhn Mod-10 verification, and contextual heuristics, outputting results as rich terminal tables, JSON, or CSV reports. It integrates natively with pre-commit hooks and GitHub Actions to catch PII before it reaches production or version control.
 
+## ☁️ Azure Cloud Integration
+
+`pii-radar` provides streaming PII redaction components for Microsoft Azure Storage and Azure Event Hubs:
+
+### Stream and Redact Files in Azure Blob Storage
+```python
+from pii_radar.integrations import AzureBlobStreamRedactor
+
+# Scans CSV/JSON blobs in Azure Blob Storage and uploads redacted sanitized copies
+redactor = AzureBlobStreamRedactor(
+    connection_string="DefaultEndpointsProtocol=https;...",
+    container_name="customer-data"
+)
+total_found, counts = redactor.redact_blob("raw_customers.csv", output_blob_name="sanitized_customers.csv")
+print(f"Redacted {total_found} PII occurrences in Azure Blob Storage.")
+```
+
+### Real-Time PII Redaction in Azure Event Hubs
+```python
+from pii_radar.integrations import AzureEventHubHandler
+
+# Redacts sensitive PII in real-time telemetry streaming event batches
+handler = AzureEventHubHandler(
+    connection_string="Endpoint=sb://...",
+    eventhub_name="telemetry-hub"
+)
+redacted_events = handler.process_event_batch(raw_event_messages)
+```
+
 ---
 
-## ✨ Features
+## 🚀 Usage Guides
 
-- 🔎 **6 PII types detected** — Email, Phone, SSN, Credit Card (Luhn validated), IP Address (IPv4 & IPv6), Date of Birth (Heuristic)
+- ⚡ **Azure Blob Storage Stream Redactor** — Real-time PII scanning & masking for CSV/JSON files in Azure Storage containers (`AzureBlobStreamRedactor`)
+- 📡 **Azure Event Hubs Integration** — Low-latency PII redaction pipeline for streaming telemetry in Azure Event Hubs (`AzureEventHubHandler`)
 - 📁 **3 file formats** — CSV, JSON, Parquet (`.parquet`, `.pq`)
 - 📂 **Folder scanning** — Recursively scan entire directories
 - 🎨 **Beautiful terminal output** — Rich tables with confidence scores
@@ -42,8 +76,14 @@ Data engineers and ML practitioners routinely work with datasets that silently c
 # Base installation (Lightweight)
 pip install pii-radar
 
+# With Azure Blob Storage & Azure Event Hubs support
+pip install "pii-radar[azure]"
+
 # With Parquet support
 pip install "pii-radar[parquet]"
+
+# Everything (Azure Blob/EventHubs + Parquet)
+pip install "pii-radar[all]"
 ```
 
 Or install from source:
